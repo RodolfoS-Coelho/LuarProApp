@@ -189,6 +189,7 @@ const SUPA_URL='https://etjsjwpoptrwmxodtknh.supabase.co';
 const SUPA_KEY='sb_publishable_1Fl2gc_WopoxFiE3bWMn1Q_uotrPZY0';
 const supa=async(path,opts={})=>{
   const res=await fetch(`${SUPA_URL}/rest/v1/${path}`,{
+    ...opts,
     headers:{
       'apikey':SUPA_KEY,
       'Authorization':`Bearer ${SUPA_KEY}`,
@@ -196,7 +197,6 @@ const supa=async(path,opts={})=>{
       'Prefer':'return=representation',
       ...opts.headers,
     },
-    ...opts,
   });
   if(!res.ok) throw new Error(await res.text());
   const text=await res.text();
