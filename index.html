@@ -284,22 +284,6 @@ const saveU=u=>{try{localStorage.setItem(AK,JSON.stringify(u));}catch{}};
 const CFG0={storeName:'Studio Luar Pro',razaoSocial:'',cnpj:'',endereco:'',cidade:'',uf:'',cep:'',logo:'',taxPix:0,taxDebito:1.5,payMethods:['pix','dinheiro','debito','credito','fiado'],tiers:[{p:1,t:2.5},{p:2,t:3.5},{p:3,t:4.5},{p:4,t:5.5},{p:5,t:6.5},{p:6,t:7.5}]};
 const CATS0=['Cílios','Pinças','Adesivos','Esmaltes','Acessórios','Outros'];
 
-const SP=[{id:'p1',name:'Cílios Maria Sasha 4D W',brand:'Maria Sasha',cat:'Cílios',notes:'Curvatura M'},{id:'p2',name:'Pinça Ponto Cruz Reta',brand:'',cat:'Pinças',notes:''},{id:'p3',name:'Esmalte Gel',brand:'',cat:'Esmaltes',notes:''}];
-const SV=[
-  {id:'v1',pid:'p1',label:'7mm', sku:'CIL-7001',stock:40,minStock:10,cost:14,price:28},
-  {id:'v2',pid:'p1',label:'8mm', sku:'CIL-8001',stock:35,minStock:10,cost:14,price:28},
-  {id:'v3',pid:'p1',label:'9mm', sku:'CIL-9001',stock:20,minStock:10,cost:14,price:28},
-  {id:'v4',pid:'p1',label:'10mm',sku:'CIL-A001',stock:5, minStock:10,cost:14,price:28},
-  {id:'v5',pid:'p2',label:'Padrão',sku:'PIN-0001',stock:15,minStock:5,cost:22,price:42},
-  {id:'v6',pid:'p3',label:'Rosa Nude',sku:'ESM-R001',stock:30,minStock:10,cost:8,price:16},
-  {id:'v7',pid:'p3',label:'Vermelho',sku:'ESM-V001',stock:25,minStock:10,cost:8,price:16},
-];
-const SC=[
-  {id:'c1',name:'Ana Paula Souza',phone:'(11)99999-1111',cpf:'',email:'',birthday:'1995-06-15',notes:'Prefere fio a fio',debt:0},
-  {id:'c2',name:'Camila Ferreira', phone:'(11)98888-2222',cpf:'',email:'',birthday:'1990-07-22',notes:'Mensalista',debt:45},
-  {id:'c3',name:'Juliana Martins', phone:'(11)97777-3333',cpf:'',email:'',birthday:today(),notes:'',debt:0},
-];
-
 /* ─── Shared Components ────────────────────────────── */
 function Modal({title,onClose,children}){
   return(
@@ -1134,12 +1118,12 @@ function App(){
   const [tab,setTab]       =useState('dash');
   const [cfg,setCfg]       =useDB('slp_cfg_v6',CFG0);
   const [cats,setCats]     =useDB('slp_cats_v6',CATS0);
-  const [prods,setProds]   =useCloudDB('produtos','slp_prods_v6',SP);
-  const [vars,setVars]     =useCloudDB('variacoes','slp_vars_v6',SV,ROW_VARIACOES);
-  const [clis,setClis]     =useCloudDB('clientes','slp_clis_v6',SC,ROW_CLIENTES);
+  const [prods,setProds]   =useCloudDB('produtos','slp_prods_v6',[]);
+  const [vars,setVars]     =useCloudDB('variacoes','slp_vars_v6',[],ROW_VARIACOES);
+  const [clis,setClis]     =useCloudDB('clientes','slp_clis_v6',[],ROW_CLIENTES);
   const [vendas,setVendas] =useCloudDB('vendas','slp_vendas_v6',[],ROW_VENDAS);
-  const [txs,setTxs]       =useCloudDB('transacoes','slp_txs_v6',[{id:'t1',type:'desp',cat:'Compra estoque',desc:'Reposição cílios',amount:280,date:nowISO(),sup:'Fornecedor Premium'}]);
-  const [contas,setContas] =useCloudDB('contas','slp_contas_v6',[{id:'ct1',desc:'Aluguel sala',amount:800,dueDate:'2025-07-01',cat:'Aluguel',sup:'',paid:false},{id:'ct2',desc:'Fornecedor Cílios',amount:350,dueDate:'2025-07-15',cat:'Fornecedor',sup:'Fornecedor Premium',paid:false}],ROW_CONTAS);
+  const [txs,setTxs]       =useCloudDB('transacoes','slp_txs_v6',[]);
+  const [contas,setContas] =useCloudDB('contas','slp_contas_v6',[],ROW_CONTAS);
 
   const nav=(t)=>setTab(t);
 
